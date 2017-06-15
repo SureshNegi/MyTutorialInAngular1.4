@@ -1,28 +1,65 @@
-<div ng-controller="driversController">
-    <div class="w3-row w3-white w3-padding w3-hide-medium w3-hide-small" style="margin-top:5px;">
-        <div class="w3-half" style="margin:4px 0 6px 0"><a class="w3schools-logo" href="javascript:void(0)">My Tutorial<span class="dotcom">.com</span></a></div>
-        <div class="w3-half w3-margin-top w3-wide w3-hide-medium w3-hide-small">
-            <div class="w3-right" style="position:relative;top:5px;">Front End Tutorial</div>
-        </div>
-    </div>
-
-    <input type="text" ng-model="nameFilter" ng-show="false" placeholder="Search..." />
+﻿<div ng-controller="homeController">
     <div ng-show="true">
-        
-            <div><span>My Tutorial</span></div>
-        
+        <div class="w3-row w3-white w3-padding w3-hide-medium w3-hide-small" style="margin-top:5px;">
+            <div class="w3-half" style="margin:4px 0 6px 0"><a class="w3schools-logo" href="javascript:void(0)">My Tutorial<span class="dotcom">.com</span></a></div>
+            <div class="w3-half w3-margin-top w3-wide w3-hide-medium w3-hide-small">
+                <div class="w3-right" style="position:relative;top:5px;">Front End Tutorial</div>
+            </div>
+        </div>
+        <div class="w3-bar w3-theme w3-card-2 w3-wide">
+            <a class="w3-bar-item w3-button w3-hover-white w3-padding-16 hidesm" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-home"></i></a>
+            <a class="w3-bar-item w3-button barex w3-hover-white w3-padding-16" href="javascript:void(0)" onclick="w3_open_nav('tutorials')" id="navbtn_tutorials">TUTORIALS <i class="fa fa-caret-down"></i><i class="fa fa-caret-up" style="display:none"></i></a>
+            <!--<a class="w3-bar-item w3-button barex w3-hover-white w3-padding-16" href="javascript:void(0)" onclick="w3_open_nav('references')" id="navbtn_references">REFERENCES <i class="fa fa-caret-down"></i><i class="fa fa-caret-up" style="display:none"></i></a>
+            <a class="w3-bar-item w3-button barex w3-hover-white w3-padding-16" href="javascript:void(0)" onclick="w3_open_nav('examples')" id="navbtn_examples">EXAMPLES <i class="fa fa-caret-down"></i><i class="fa fa-caret-up" style="display:none"></i></a>-->
+            <!--<div class="w3-right">
+                <a class="w3-bar-item w3-button w3-hover-white w3-padding-16 w3-right" href="javascript:void(0)" onclick="open_search(this)" title="Search W3Schools"><i class="fa"></i></a>
+                <a class="w3-bar-item w3-button w3-hover-white w3-padding-16 w3-right" href="javascript:void(0)" onclick="open_translate(this)" title="Translate W3Schools"><i class="fa"></i></a>
+            </div>-->
+        </div>
+        <div class="w3-sidebar w3-collapse" id="sidenav" style="top: 156px;">
+            <div id="leftmenuinner" style="padding-top: 156px;">
+                <div class="w3-light-grey" id="leftmenuinnerinner">
+                    <h2 class="left"><span class="left_h2">Angularjs </span> Tutorial</h2>
+                    <a ng-repeat="item in tutorialTopics" href="javascript:void(0);" ng-click="loadPage(item)">{{item.title}}</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="w3-main w3-light-grey" id="belowtopnav" style="margin-left: 220px; padding-top: 0px;">
+            <div class="w3-row w3-white">
+                <h1>Page contents...</h1>
+                <div class="w3-col l10 m12" id="main">
+                  <span>{{topic.title}}</span>	
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <input type="text" ng-model="nameFilter" ng-show="false" placeholder="Search..." />
+
+    <div ng-show="false">
+
+        <div><span>My Tutorial</span></div>
+
         <div>
-            <div ng-repeat="driver in tutorialTopics | filter: searchFilter">
+            <div  ng-repeat="driver in tutorialTopics | filter: searchFilter">
                 <span>{{$index + 1}}</span>
                 <span>
                     <img src="img/flags/{{driver.id}}.png" />
-                    <a href="javascript:void(0)" ng-click="getInformationById(driver)" >
-                        {{driver.displayName}}&nbsp;{{driver.displayName}}
+                    <a href="javascript:void(0)" ng-click="getInformationById(driver)">
+                        {{driver}}&nbsp;{{driver}}
                     </a>
                 </span>
                 <!--<td>{{driver.Constructors[0].name}}</td>
                 <td>{{driver.points}}</td>-->
+
+
             </div>
+            <
         </div>
+
+
+        <
     </div>
 </div>
+    </div>

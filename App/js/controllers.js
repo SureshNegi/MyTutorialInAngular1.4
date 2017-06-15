@@ -1,35 +1,38 @@
 angular.module('F1FeederApp.controllers', []).
 
   /* Drivers controller */
-  controller('driversController', ['$scope', 'ergastAPIservice', '$state',function($scope, ergastAPIservice,$state) {
+  controller('homeController', ['$scope', 'ergastAPIservice', '$state', function ($scope, ergastAPIservice, $state, $http) {
       $scope.nameFilter = null;
       $scope.driversList = [];
+      var obj = { topics: ['Angular HOME', 'Angular Intro'] };
+      str = JSON.stringify(obj);
       $scope.searchFilter = function (driver) {
           var re = new RegExp($scope.nameFilter, 'i');
           return !$scope.nameFilter || re.test(driver.displayName) || re.test(driver.displayName);
       };
       $scope.getInformationById = function (object) {
-          $state.go('driver', {
-              "data": object
-          });
+          //$state.go('driver', {
+          //    "data": object
+          //});
       }
-      ergastAPIservice.getDrivers().success(function (response) {
+      $scope.loadPage = function (topic) {
+          //$state.go('newPage');
+          $scope.topic = topic;
+      }
+
+      ergastAPIservice.getTopics().success(function (response) {
           //Digging into the response to get the relevant data
           //$scope.driversList = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-          $scope.tutorialTopics = [];
-          var topics = ["JavaScript", "AngularJs 1.4", "AngularJs 1.5", "AngularJs 1.6","Angular"]
-          for (var i = 0; i < topics.length; i++) {
-              $scope.tutorialTopics.push({ id: i + 1, displayName: topics[i], category: 'Front End' });
-          }
+          $scope.tutorialTopics = response.topics;
       });
   }]).
 
   /* Driver controller */
   controller('driverController', function ($scope, $routeParams, ergastAPIservice, $rootScope, $stateParams) {
-      var _data=$stateParams.data;
+      var _data = $stateParams.data;
       $scope.id = _data.Driver.driverId;
       $scope.races = [];
-      $scope.driver = null;     
+      $scope.driver = null;
       ergastAPIservice.getDriverDetails($scope.id).success(function (response) {
           $scope.driver = response.MRData.StandingsTable.StandingsLists[0].DriverStandings[0];
       });
@@ -60,8 +63,8 @@ angular.module('F1FeederApp.controllers', []).
                   else {
                       $scope.$apply(function () {
                           $scope.loginError = true;
-                      });                   
-                      
+                      });
+
                   }
               },
               error: function (xhr, status, error) {
@@ -74,12 +77,13 @@ angular.module('F1FeederApp.controllers', []).
       $scope.SignUp = function () {
           $location.path('/register');
       }
-  })
+  }).
+ controller('contentController', function ($scope, $routeParams, ergastAPIservice, $location) { })
 .controller('registerController', function ($scope, $routeParams, ergastAPIservice, $location) {
     this.register = function () {
-    
+
         user_info = { fName: this.user.firstName, lName: this.user.lastName, uName: this.user.username, eMail: this.user.uEmail, passWord: this.user.password };
-    
+
 
         $.ajax({
             url: 'http://10.197.131.14:8080/addUser',
@@ -87,8 +91,8 @@ angular.module('F1FeederApp.controllers', []).
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             type: 'POST',
-           
-            success: function (data) {               
+
+            success: function (data) {
                 $location.path('/login');
             },
             error: function (xhr, status, error) {

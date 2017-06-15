@@ -20,9 +20,18 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/drivers',
             templateUrl: 'partials/drivers.html'
         })
+        .state('newPage', {
+            url: '/newPage',
+            templateUrl: 'partials/contents.html'
+        })
         .state('driver', {
             url: '/driver',
-            templateUrl: 'partials/driver.html',
+            views: {	
+                'graph': {		
+                    templateUrl: 'partials/driver.html'	
+                   		
+                },		
+           
             params: {
                 data: null
 

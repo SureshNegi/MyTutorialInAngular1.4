@@ -1,0 +1,13 @@
+{
+  "topics": [
+    { "title": "Angular HOME" },
+    { "title":"Angular Intro"},
+    { "title":"Angular Expressions"},
+    { "title":"Angular Modules"},
+   { "title": "Angular Directives"},
+    { "title":"Angular Model"},
+   { "title": "Angular Data Binding"},
+    { "title": "Angular Controllers" }
+  ]
+
+}

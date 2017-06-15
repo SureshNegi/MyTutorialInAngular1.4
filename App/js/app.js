@@ -9,7 +9,7 @@ var app = angular.module('F1FeederApp', ['ui.router', 'ngRoute', 'F1FeederApp.se
 //}]);
 app.config(function ($stateProvider, $urlRouterProvider) {
     // Push Interceptors 
-    
+
     $urlRouterProvider.otherwise('/login');
     $stateProvider
         .state('register', {
@@ -19,23 +19,38 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('login', {
             url: '/login',
             templateUrl: 'partials/login.html'
-        })        
+        })
         .state('drivers', {
             url: '/drivers',
             templateUrl: 'partials/drivers.html'
         })
+        .state('newPage', {
+            url: '/newPage',
+            templateUrl: 'partials/contents.html'
+        })
         .state('driver', {
             url: '/driver',
-            controller: 'driverController',
             templateUrl: 'partials/driver.html',
             params: {
                 data: null
 
             }
         })
+    //.state('newPage', {
+    //    url: '/newPage',
+    //    views: {
+    //        'graph': {
+    //            templateUrl: 'partials/contents.html'
+    //        },
+    //        params: {
+    //            data: null
+
+    //        }
+    //    }
+    //})
     //$stateProvider.state(home);
     // if none of the above states are matched, use this as the fallback
-   // $urlRouterProvider.otherwise("/login");
+    // $urlRouterProvider.otherwise("/login");
 
 })
 .run(['$state', function ($rootScope, $state, $stateParams) {
