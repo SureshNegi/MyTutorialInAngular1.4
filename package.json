@@ -1,0 +1,25 @@
+{
+  "name": "tets",
+  "version": "1.0.0",
+  "description": "test",
+  "dependencies": {  
+        "express": "*"  
+      },
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SureshNegi/AngularjsWithNode.git"
+  },
+  "author": "suresh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SureshNegi/AngularjsWithNode/issues"
+  },
+  "homepage": "https://github.com/SureshNegi/AngularjsWithNode#readme"
+}
+
+

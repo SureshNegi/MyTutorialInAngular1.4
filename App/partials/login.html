@@ -1,0 +1,26 @@
+<div id="vwDesktop" ng-controller="loginController" check-key-press ctrl-id="loginbtnDsktp" dv-id="vwDesktop">
+        <div class="loginContainer"  tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div>
+
+            <div class="loginmodal-container">
+                <h1>Login to Your Account</h1><br>
+
+                <div ng-if="loginError" class="errSpan alert alert-danger fade in">
+                    <span class="">Wrong UserName or Password.Please Try Again.</span>
+                </div>
+                <form>
+                    <input type="text" name="user" placeholder="Username" ng-model="username">
+                    <input type="password" name="pass" placeholder="Password" ng-model="password">
+                    <input type="submit" ng-click="login()" name="login" class="login loginmodal-submit" value="Login">
+                </form>
+
+                <div class="login-help">
+                    <a href="#" ng-click="SignUp()" class="helpButton loginBtn">Register</a>
+                    <a class="helpButton loginBtn" href="#">Forgot Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
