@@ -28,6 +28,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/newPage',
             templateUrl: 'partials/contents.html'
         })
+         .state("content", {
+             url: "/content",
+             templateUrl: "partials/contents.html"
+         })
         .state('driver', {
             url: '/driver',
             templateUrl: 'partials/driver.html',
