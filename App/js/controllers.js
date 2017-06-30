@@ -1,15 +1,21 @@
 angular.module('F1FeederApp.controllers', []).
 
-  /* Drivers controller */
-  controller('homeController', ['$scope', 'ergastAPIservice', '$state', function ($scope, ergastAPIservice, $state, $http) {
+  /* Drivers controller */  
+  controller('homeController', ['$scope', 'ergastAPIservice', '$state', '$timeout', function ($scope, ergastAPIservice, $state, $http, $timeout) {
       $scope.nameFilter = null;
       $scope.driversList = [];
+      $scope.videoUrl = "https://www.w3schools.com/html/mov_bbb.mp4";
       var obj = { topics: ['Angular HOME', 'Angular Intro'] };
       str = JSON.stringify(obj);
       $scope.searchFilter = function (driver) {
           var re = new RegExp($scope.nameFilter, 'i');
           return !$scope.nameFilter || re.test(driver.displayName) || re.test(driver.displayName);
       };
+      $scope.loadContent = function (item) {
+          alert('parent-controller-method');
+          document.querySelector("#myVideoTag > source").src = "http://vjs.zencdn.net/v/oceans.webm";
+         
+      }
       $scope.getInformationById = function (object) {
           //$state.go('driver', {
           //    "data": object
@@ -24,6 +30,7 @@ angular.module('F1FeederApp.controllers', []).
           //Digging into the response to get the relevant data
           //$scope.driversList = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
           $scope.tutorialTopics = response.topics;
+          $scope.defaultSelected = $scope.tutorialTopics[0];
       });
   }]).
 
