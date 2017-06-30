@@ -1,4 +1,4 @@
-﻿<div ng-controller="homeController">
+<div ng-controller="homeController">
     <div ng-show="true">
         <div class="w3-row w3-white w3-padding w3-hide-medium w3-hide-small" style="margin-top:5px;">
             <div class="w3-half" style="margin:4px 0 6px 0"><a class="w3schools-logo" href="javascript:void(0)">My Tutorial<span class="dotcom">.com</span></a></div>
@@ -16,27 +16,25 @@
                 <a class="w3-bar-item w3-button w3-hover-white w3-padding-16 w3-right" href="javascript:void(0)" onclick="open_translate(this)" title="Translate W3Schools"><i class="fa"></i></a>
             </div>-->
         </div>
-        <div class="w3-sidebar w3-collapse" id="sidenav" style="top: 156px;">
-            <div id="leftmenuinner" style="padding-top: 156px;">
+        <div class="w3-sidebar w3-collapse" id="sidenav" style="top: 197px;">
+            <div id="leftmenuinner" style="padding-top: 197px;">
                 <div class="w3-light-grey" id="leftmenuinnerinner">
-                    <left-panel></left-panel>
                     <h2 class="left"><span class="left_h2">Angularjs </span> Tutorial</h2>
-                    <a ui-sref="content" ng-repeat="item in tutorialTopics"  >{{item.title}}</a>
+                    <left-panel load-content="loadContent" tutorial-topics="tutorialTopics"></left-panel>                   
+                    <!--<a ui-sref="content" ng-repeat="item in tutorialTopics"  >{{item.title}}</a>-->
 
                 </div>
             </div>
         </div>
         <div class="w3-main w3-light-grey" id="belowtopnav" style="margin-left: 220px; padding-top: 0px;">
-            <div class="w3-row w3-white">
-                <h1>Page contents...</h1>
-                <div class="w3-col l10 m12" id="main">
-                  <span>{{topic.title}}</span>	
+            <div class="w3-row w3-white">                           
+                 <div class="w3-col l10 m12" id="main" > 
+                     <content-div default-selected="defaultSelected" ></content-div>  
                 </div>
+               
             </div>
         </div>
-       <div>
-           <ui-view></ui-view>
-       </div>
+            
 
     </div>
     <input type="text" ng-model="nameFilter" ng-show="false" placeholder="Search..." />
