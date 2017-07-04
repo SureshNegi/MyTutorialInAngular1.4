@@ -1,0 +1,20 @@
+<div>
+    <!--<video id="myVideoTag" width="670" height="377" autoplay="true" controls="controls" ng-if="isVideo">
+        <source src="http://www.test.com/test.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    </video>-->
+    <h1>{{item.header}}</h1>
+    <div class="w3-clear nextprev">
+        <a class="w3-left w3-btn" href="/default.asp">❮ Home</a>
+        <a class="w3-right w3-btn" href="angular_intro.asp">Next ❯</a>       
+    </div>
+    <div class="w3-row">
+        <div class="w3-quarter">
+            <img class="w3-margin-bottom" ng-src="{{item.icon}}" alt="Angular" style="width:132px">
+        </div>
+        <div class="w3-threequarter intro">                    
+            <div ng-include="item.contentUrl"></div>
+        </div>
+    </div>
+    <br/>
+    <iframe ng-if="isVideo" id="myVideoTag" width="640" height="360" src="" frameborder="0" allowfullscreen></iframe>
+</div>
