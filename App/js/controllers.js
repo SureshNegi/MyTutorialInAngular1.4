@@ -11,10 +11,8 @@ angular.module('F1FeederApp.controllers', []).
           var re = new RegExp($scope.nameFilter, 'i');
           return !$scope.nameFilter || re.test(driver.displayName) || re.test(driver.displayName);
       };
-      $scope.loadContent = function (item) {
-          alert('parent-controller-method');
-          document.querySelector("#myVideoTag > source").src = "http://vjs.zencdn.net/v/oceans.webm";
-         
+      $scope.loadContent = function (item) {          
+          $scope.defaultSelected = item;         
       }
       $scope.getInformationById = function (object) {
           //$state.go('driver', {
