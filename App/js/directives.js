@@ -26,9 +26,14 @@ angular.module('F1FeederApp')
         scope: { defaultSelected: '=' },
         templateUrl: 'partials/Content.html',
         controller: function ($scope) {
-            console.log($scope.defaultSelected);
+            //alert('hi');
+            //console.log($scope.defaultSelected);
             $scope.isVideo = false;
-            $scope.item = { contentUrl :''};            
+            var listner = $scope.$watch("defaultSelected", function () {
+                $scope.item = $scope.defaultSelected;
+                $scope.loadContent($scope.item);
+            });
+            
             $scope.loadContent = function (item) {
                 $scope.isVideo = false;
                 $scope.item = item;               
