@@ -17,9 +17,23 @@ angular.module('F1FeederApp')
         //        $scope.loadContent(item);
         //    }
         //},
-        template: '<a href="javascript:void(0)" ng-repeat="item in tutorialTopics" ng-click="loadContent(item)"  >{{item.title}}</a>',
+        template: '<a href="javascript:void(0)" ng-repeat="item in tutorialTopics" ng-class="item.cls" ng-click="loadContent(item)"  >{{item.title}}</a>',
     };
 })
+.directive('topPanel', function ($compile, $http) {
+        return {
+            // Restrict it to be an attribute in this case
+            restrict: 'E',
+           
+            controller: function ($scope) {
+                $scope.nextPage = function () {
+                    console.log($scope.tutorialTopics);
+                    $scope.loadContent($scope.tutorialTopics[1]);
+                }
+            },
+            templateUrl: 'partials/topPanel.html',
+        };
+    })
 .directive('contentDiv', function ($compile, $http) {
     return {        
         restrict: 'E',
@@ -27,7 +41,7 @@ angular.module('F1FeederApp')
         templateUrl: 'partials/Content.html',
         controller: function ($scope) {
             //alert('hi');
-            //console.log($scope.defaultSelected);
+            console.log($scope.tutorialTopics);
             $scope.isVideo = false;
             var listner = $scope.$watch("defaultSelected", function () {
                 $scope.item = $scope.defaultSelected;

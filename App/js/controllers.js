@@ -1,23 +1,23 @@
 angular.module('F1FeederApp.controllers', []).
 
-  /* Drivers controller */  
-  controller('homeController', ['$scope', 'ergastAPIservice', '$state', '$timeout', function ($scope, ergastAPIservice, $state, $http, $timeout) {
+  /* Drivers controller */
+  controller('homeController', ['$scope', 'ergastAPIservice', '$state',  'appConfig', function($scope, ergastAPIservice, $state, $http, appConfig) {
       $scope.nameFilter = null;
       $scope.driversList = [];
-      $scope.videoUrl = "https://www.w3schools.com/html/mov_bbb.mp4";
       var obj = { topics: ['Angular HOME', 'Angular Intro'] };
       str = JSON.stringify(obj);
       $scope.searchFilter = function (driver) {
           var re = new RegExp($scope.nameFilter, 'i');
           return !$scope.nameFilter || re.test(driver.displayName) || re.test(driver.displayName);
       };
-      $scope.loadContent = function (item) {          
-          $scope.defaultSelected = item;         
-      }
       $scope.getInformationById = function (object) {
           //$state.go('driver', {
           //    "data": object
           //});
+      }
+ $scope.loadContent = function (item) {          
+     $scope.defaultSelected = item;
+     //$scope.header = item.header;
       }
       $scope.loadPage = function (topic) {
           //$state.go('newPage');
@@ -27,6 +27,7 @@ angular.module('F1FeederApp.controllers', []).
       ergastAPIservice.getTopics().success(function (response) {
           //Digging into the response to get the relevant data
           //$scope.driversList = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+          //$scope.tutorialTopics = response.topics;
           $scope.tutorialTopics = response.topics;
           $scope.defaultSelected = $scope.tutorialTopics[0];
       });
@@ -47,7 +48,7 @@ angular.module('F1FeederApp.controllers', []).
       });
   }).
 
-  controller('loginController', function ($scope, $routeParams, ergastAPIservice, $location) {
+  controller('loginController', function($scope, $routeParams, ergastAPIservice, $location, appConfig) {
 
       $scope.id = $routeParams.id;
       $scope.races = [];
@@ -57,7 +58,7 @@ angular.module('F1FeederApp.controllers', []).
           // $location.path('/drivers');
           user_info = { uName: $scope.username, passWord: $scope.password };
           $.ajax({
-              url: 'http://10.197.131.14:8080/login',
+              url: appConfig.BASE_URL + '/login',
               data: JSON.stringify(user_info),
               contentType: "application/json; charset=utf-8",
               dataType: "json",
@@ -84,14 +85,14 @@ angular.module('F1FeederApp.controllers', []).
       }
   }).
  controller('contentController', function ($scope, $routeParams, ergastAPIservice, $location) { })
-.controller('registerController', function ($scope, $routeParams, ergastAPIservice, $location) {
+.controller('registerController', function($scope, $routeParams, ergastAPIservice, $location, appConfig) {
     this.register = function () {
 
         user_info = { fName: this.user.firstName, lName: this.user.lastName, uName: this.user.username, eMail: this.user.uEmail, passWord: this.user.password };
 
 
         $.ajax({
-            url: 'http://10.197.131.14:8080/addUser',
+        url: appConfig.BASE_URL + '/addUser',
             data: JSON.stringify(user_info),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

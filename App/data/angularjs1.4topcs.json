@@ -1,7 +1,7 @@
 {
   "topics": [
-    { "title": "Angular HOME","videoUrl":"https://www.youtube.com/embed/k4qVkWh1EAo","header": "AngularJS Tutorial","icon": "./img/Icons/pic_angular.jpg","contentUrl":"data/1.html" },
-    { "title":"Angular Intro","videoUrl":"https://www.youtube.com/embed/k4qVkWh1EAo"},
+    { "title": "Angular HOME","videoUrl":"","header": "AngularJS Tutorial","icon": "./img/Icons/pic_angular.jpg","contentUrl":"data/1.html" },
+    { "title":"Angular Intro","videoUrl":"https://www.youtube.com/embed/k4qVkWh1EAo","contentUrl":"data/1.html"},
     { "title":"Angular Expressions","videoUrl":"1"},
     { "title":"Angular Modules","videoUrl":"1"},
    { "title": "Angular Directives","videoUrl":"1"},

@@ -1,4 +1,5 @@
 angular.module('F1FeederApp.services', [])
+.constant("appConfig",{'BASE_URL': 'http://localhost:8080'})
   .factory('ergastAPIservice', function($http) {
 
     var ergastAPI = {};

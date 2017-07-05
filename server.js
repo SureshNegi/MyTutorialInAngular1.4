@@ -9,73 +9,70 @@ app.get('/', function (req, res) {
     console.log("server request");
     res.redirect('/');
 });
-app.post('/login', function (req, res) {
-    var path = require('path');
-    var userName = process.env['USERPROFILE'].split(path.sep)[2];
-    var loginId = path.join("domainName", userName);
-    console.log(loginId);
-
+app.post('/login', function(req, res) {
+    console.log('logging');
 
     var arr = [], fileName = "file.json";
     var user = null;
     fs = require('fs');
-    var obj = fs.readFileSync(fileName, 'utf8');   
+    var obj = fs.readFileSync(fileName, 'utf8');
     if (obj.length < 10) {
         console.log("no data");
     }
     else {
         arr = JSON.parse(obj);
     }
-    var body = '';  
-    req.on('data', function (data) {
+    var body = '';
+    req.on('data', function(data) {
         user = JSON.parse(data);
         console.log(user);
-        for (var i = 0; i < arr.length;i++){
+        for (var i = 0; i < arr.length; i++) {
             if (JSON.parse(arr[i]).uName == user.uName && JSON.parse(arr[i]).passWord == user.passWord) {
                 console.log('user exist');
-                user.exist=true;
+                user.exist = true;
                 break;
             }
         }
     });
 
-    req.on('end', function () {
+    req.on('end', function() {
         if (user.exist) {
             console.log('res:user exist');
-            res.end(JSON.stringify({ response: { status: 1 } }));
+            res.end(JSON.stringify({ response: { status: 1} }));
         }
         else {
             console.log('res:user not exist');
-            res.end(JSON.stringify({ response: { status: 0 } }));
+            res.end(JSON.stringify({ response: { status: 0} }));
         }
     });
 });
-app.post('/addUser', function (req, res) { 
+app.post('/addUser', function(req, res) {
+    console.log('registering user');
     var arr = [], fileName = "file.json";
     fs = require('fs');
     var obj = fs.readFileSync(fileName, 'utf8');
-    console.log("length=="+obj.length);
-    if (obj.length<10) {
+    console.log("length==" + obj.length);
+    if (obj.length < 10) {
         console.log("no data");
     }
     else {
-        arr =JSON.parse(obj);    
+        arr = JSON.parse(obj);
     }
     var body = '';
-    filePath = 'helloworld.json';
-    req.on('data', function (data) {
-       body += data;      
+
+    req.on('data', function(data) {
+        body += data;
     });
 
-    req.on('end', function () {
+    req.on('end', function() {
         arr[arr.length] = body;
-        fs.writeFile('file.json',JSON.stringify(arr), 'utf8'); 
-        var str=JSON.stringify(arr);
+        fs.writeFile('file.json', JSON.stringify(arr), 'utf8');
+        var str = JSON.stringify(arr);
         //res.end('{"msg": "OK"}');
         res.end(str);
     });
 });
-app.listen(8080, '10.197.131.14');
+app.listen(8080, 'localhost');
 
 
 
