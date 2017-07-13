@@ -181,6 +181,7 @@ box-sizing: border-box;
 .w3-col, .w3-half, .w3-third, .w3-twothird, .w3-threequarter, .w3-quarter {
     float: left;
     width: 100%;
+    padding-top:20px;
 }
 .w3schools-logo {
 font-family:'fontawesome';
@@ -232,7 +233,7 @@ height:60px;
 }
 .w3-theme {
     color: #fff !important;
-    background-color: #4CAF50 !important;
+    background-color: #5f5f5f !important;
 }
 
 .w3-bar .w3-button {
@@ -325,6 +326,9 @@ transform:translate(0,0);
     overflow-x: hidden;
     padding-top: 20px;
 }
+ #leftmenuinnerinner .selectedItem {
+ background-color:#4CAF50;   
+ }
 .w3-light-grey, .w3-hover-light-grey:hover, .w3-light-gray, .w3-hover-light-gray:hover {
     color: #000 !important;
     background-color: #f1f1f1 !important;
@@ -366,4 +370,46 @@ a {
 .w3-col, .w3-half, .w3-third, .w3-twothird, .w3-threequarter, .w3-quarter {
     float: left;
     width: 100%;
+}
+
+/*next-prev section*/
+.w3-clear::after, .w3-clear::before, .w3-bar::before, .w3-bar::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.nextprev a:link, .nextprev a:visited {
+    background-color: #ffffff;
+    color: #000000;
+}
+.nextprev a {
+    font-size: 17px;
+    border: 1px solid #cccccc;
+}
+.nextprev a.w3-right {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border-color: #4CAF50;
+}
+.w3-right {
+    float: right !important;
+}
+.w3-left {
+    float: left !important;
+}
+.w3-container::after, .w3-container::before, .w3-panel::after, .w3-panel::before, .w3-row::after, .w3-row::before, .w3-row-padding::after, .w3-row-padding::before, .w3-cell-row::before, .w3-cell-row::after, .w3-clear::after, .w3-clear::before, .w3-bar::before, .w3-bar::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.intro {
+    font-size: 16px;
+}
+.w3-col.m9, .w3-threequarter {
+    width: 74.99999%;
+}
+.w3-col.m3, .w3-quarter {
+    width: 24.99999%;
 }

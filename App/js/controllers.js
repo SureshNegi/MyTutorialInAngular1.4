@@ -1,7 +1,10 @@
 angular.module('F1FeederApp.controllers', []).
 
   /* Drivers controller */
-  controller('homeController', ['$scope', 'ergastAPIservice', '$state',  'appConfig', function($scope, ergastAPIservice, $state, $http, appConfig) {
+  controller('homeController', ['$scope', 'ergastAPIservice', 'pagination', '$state', 'appConfig', function ($scope, ergastAPIservice, pagination, $state, $http, appConfig) {
+     // var myInjector = angular.injector(["F1FeederApp.services"]);
+    
+      //var pagination = myInjector.get("pagination");
       $scope.nameFilter = null;
       $scope.driversList = [];
       var obj = { topics: ['Angular HOME', 'Angular Intro'] };
@@ -15,9 +18,12 @@ angular.module('F1FeederApp.controllers', []).
           //    "data": object
           //});
       }
- $scope.loadContent = function (item) {          
-     $scope.defaultSelected = item;
-     //$scope.header = item.header;
+      $scope.loadContent = function (item) {          
+          $scope.defaultSelected = item;          
+          $scope.tutorialTopics.forEach(function (item) {
+              item.cls = "";
+          })
+          item.cls = "selectedItem";
       }
       $scope.loadPage = function (topic) {
           //$state.go('newPage');
@@ -29,6 +35,7 @@ angular.module('F1FeederApp.controllers', []).
           //$scope.driversList = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
           //$scope.tutorialTopics = response.topics;
           $scope.tutorialTopics = response.topics;
+          pagination.setTotalPage($scope.tutorialTopics.length);
           $scope.defaultSelected = $scope.tutorialTopics[0];
       });
   }]).

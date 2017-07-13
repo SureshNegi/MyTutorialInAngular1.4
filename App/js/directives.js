@@ -20,7 +20,7 @@ angular.module('F1FeederApp')
         template: '<a href="javascript:void(0)" ng-repeat="item in tutorialTopics" ng-class="item.cls" ng-click="loadContent(item)"  >{{item.title}}</a>',
     };
 })
-.directive('topPanel', function ($compile, $http) {
+.directive('topPanel', function ($compile, $http, pagination) {
         return {
             // Restrict it to be an attribute in this case
             restrict: 'E',
@@ -28,7 +28,14 @@ angular.module('F1FeederApp')
             controller: function ($scope) {
                 $scope.nextPage = function () {
                     console.log($scope.tutorialTopics);
-                    $scope.loadContent($scope.tutorialTopics[1]);
+                    var page = pagination.getNextPage();                   
+                    if (page == -1) {
+                        //alert("no more");
+                    }
+                    else {
+                        $scope.loadContent($scope.tutorialTopics[page-1]);
+                        pagination.setCurrentPage(page);
+                    }
                 }
             },
             templateUrl: 'partials/topPanel.html',
@@ -44,8 +51,10 @@ angular.module('F1FeederApp')
             console.log($scope.tutorialTopics);
             $scope.isVideo = false;
             var listner = $scope.$watch("defaultSelected", function () {
-                $scope.item = $scope.defaultSelected;
-                $scope.loadContent($scope.item);
+                if ($scope.defaultSelected) {
+                    $scope.item = $scope.defaultSelected;
+                    $scope.loadContent($scope.item);
+                }
             });
             
             $scope.loadContent = function (item) {

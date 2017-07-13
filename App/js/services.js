@@ -35,4 +35,24 @@ angular.module('F1FeederApp.services', [])
     }
 
     return ergastAPI;
-  });
+  })
+.service('pagination', function () {
+    this.pageNo = 1;
+    this.totalPage = 1;
+    this.getCurrentPage = function () {
+        return this.pageNo;
+    },
+    this.setCurrentPage = function (page) {
+        this.pageNo = page;
+    }
+    this.setTotalPage = function (pageCnt) {
+        this.totalPage = pageCnt;
+    }
+    this.getNextPage = function () {
+        var pageNo = this.pageNo + 1;
+        if (pageNo > this.totalPage)
+            return -1;
+        return (pageNo)
+    }
+
+})
