@@ -7,14 +7,10 @@
             </div>
         </div>
         <div class="w3-bar w3-theme w3-card-2 w3-wide">
-            <a class="w3-bar-item w3-button w3-hover-white w3-padding-16 hidesm" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-home"></i></a>
-            <a class="w3-bar-item w3-button barex w3-hover-white w3-padding-16" href="javascript:void(0)" onclick="w3_open_nav('tutorials')" id="navbtn_tutorials">TUTORIALS <i class="fa fa-caret-down"></i><i class="fa fa-caret-up" style="display:none"></i></a>
-            <!--<a class="w3-bar-item w3-button barex w3-hover-white w3-padding-16" href="javascript:void(0)" onclick="w3_open_nav('references')" id="navbtn_references">REFERENCES <i class="fa fa-caret-down"></i><i class="fa fa-caret-up" style="display:none"></i></a>
-            <a class="w3-bar-item w3-button barex w3-hover-white w3-padding-16" href="javascript:void(0)" onclick="w3_open_nav('examples')" id="navbtn_examples">EXAMPLES <i class="fa fa-caret-down"></i><i class="fa fa-caret-up" style="display:none"></i></a>-->
-            <!--<div class="w3-right">
-                <a class="w3-bar-item w3-button w3-hover-white w3-padding-16 w3-right" href="javascript:void(0)" onclick="open_search(this)" title="Search W3Schools"><i class="fa"></i></a>
-                <a class="w3-bar-item w3-button w3-hover-white w3-padding-16 w3-right" href="javascript:void(0)" onclick="open_translate(this)" title="Translate W3Schools"><i class="fa"></i></a>
-            </div>-->
+            <a class="w3-bar-item w3-button w3-hover-white w3-padding-16 hidesm" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-home"></i></a>          
+          
+          <!--<drop-down data="techList" selected-item="selectedTech" on-select="onTechChange"></drop-down>-->
+          <div custom-select="item for item in techList1 | filter: $searchTerm"  on-select="onTechChange" ng-model="selectedTech1" autofocus><span>{{item}}</span></div>
         </div>
         <div class="w3-sidebar w3-collapse" id="sidenav" style="top: 197px;">
             <div id="leftmenuinner" style="padding-top: 197px;">

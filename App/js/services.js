@@ -54,5 +54,11 @@ angular.module('F1FeederApp.services', [])
             return -1;
         return (pageNo)
     }
+    this.getPrevPage = function () {
+        var pageNo = this.pageNo - 1;
+        if (pageNo <1)
+            return -1;
+        return (pageNo)
+    }
 
 })

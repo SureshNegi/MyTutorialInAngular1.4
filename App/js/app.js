@@ -1,5 +1,5 @@
 //var app = angular.module('F1FeederApp', ['ui.router', 'F1FeederApp.services', 'F1FeederApp.controllers']);
-var app = angular.module('F1FeederApp', ['ui.router', 'ngRoute', 'F1FeederApp.services', 'F1FeederApp.controllers']);
+var app = angular.module('F1FeederApp', ['ui.router', 'ngRoute', 'F1FeederApp.services', 'F1FeederApp.controllers','AxelSoft']);
 //config(['$routeProvider', function($routeProvider) {
 //  $routeProvider.
 //	when("/drivers", {templateUrl: "partials/drivers.html", controller: "driversController"}).

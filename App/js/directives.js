@@ -1,17 +1,25 @@
 'use strict';
 /* Directives */
 angular.module('F1FeederApp')
-.directive('appVersion', ['version', function(version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
+.directive('appVersion', ['version', function (version) {
+    return function (scope, elm, attrs) {
+        elm.text(version);
     };
-  }])
-
-.directive('leftPanel', function ($compile, $http) {    
+}])
+.directive('dropDown', function ($compile, $http) {
     return {
         // Restrict it to be an attribute in this case
         restrict: 'E',
-        scope: { loadContent: '=', tutorialTopics: "=" },        
+        scope: { data: '=', selectedItem: "=",onSelect:"=" },
+        template:'<select ng-model="selectedItem" ng-options="x.tech for x in data" ng-change="onSelect(selectedItem)" ></select>'
+        
+    };
+})
+.directive('leftPanel', function ($compile, $http) {
+    return {
+        // Restrict it to be an attribute in this case
+        restrict: 'E',
+        scope: { loadContent: '=', tutorialTopics: "=" },
         //controller: function ($scope) {
         //    $scope.getData = function (item) {
         //        $scope.loadContent(item);
@@ -21,28 +29,42 @@ angular.module('F1FeederApp')
     };
 })
 .directive('topPanel', function ($compile, $http, pagination) {
-        return {
-            // Restrict it to be an attribute in this case
-            restrict: 'E',
-           
-            controller: function ($scope) {
-                $scope.nextPage = function () {
-                    console.log($scope.tutorialTopics);
-                    var page = pagination.getNextPage();                   
-                    if (page == -1) {
-                        //alert("no more");
-                    }
-                    else {
-                        $scope.loadContent($scope.tutorialTopics[page-1]);
-                        pagination.setCurrentPage(page);
-                    }
+    return {
+        // Restrict it to be an attribute in this case
+        restrict: 'E',
+
+        controller: function ($scope) {
+            $scope.nextPage = function () {
+                console.log($scope.tutorialTopics);
+                var page = pagination.getNextPage();
+                if (page == -1) {
+                    //alert("no more");
                 }
-            },
-            templateUrl: 'partials/topPanel.html',
-        };
-    })
+                else {
+                    if (page > 1)
+                        $scope.isHome = false;
+                    $scope.loadContent($scope.tutorialTopics[page - 1]);
+                    pagination.setCurrentPage(page);
+                }
+            }
+            $scope.prevPage = function () {
+                var page = pagination.getPrevPage();
+                if (page == -1) {
+                    alert("no more");
+                }
+                else {
+                    if (page <= 2)
+                        $scope.isHome = true;
+                    $scope.loadContent($scope.tutorialTopics[page - 1]);
+                    pagination.setCurrentPage(page);
+                }
+            }
+        },
+        templateUrl: 'partials/topPanel.html',
+    };
+})
 .directive('contentDiv', function ($compile, $http) {
-    return {        
+    return {
         restrict: 'E',
         scope: { defaultSelected: '=' },
         templateUrl: 'partials/Content.html',
@@ -56,10 +78,10 @@ angular.module('F1FeederApp')
                     $scope.loadContent($scope.item);
                 }
             });
-            
+
             $scope.loadContent = function (item) {
                 $scope.isVideo = false;
-                $scope.item = item;               
+                $scope.item = item;
                 console.log($scope.item);
                 //ergastAPIservice.getTopics().success(function (response) {
                 //    //Digging into the response to get the relevant data
@@ -68,9 +90,9 @@ angular.module('F1FeederApp')
                 //});
                 if (item.videoUrl && item.videoUrl.trim().length > 0) {
                     $scope.isVideo = true;
-                    setTimeout(function () {                       
+                    setTimeout(function () {
                         document.querySelector("#myVideoTag").src = item.videoUrl;
-                    },10);
+                    }, 10);
                 }
             }
         },

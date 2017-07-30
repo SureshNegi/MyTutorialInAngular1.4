@@ -1,5 +1,6 @@
 ﻿<!--<h1>{{header}}</h1>-->
     <div class="w3-clear nextprev">
-        <a class="w3-left w3-btn" href="/default.asp">❮  Home</a>
+        <a class="w3-left w3-btn" href="/default.asp" ng-show="isHome">❮  Home</a>
+        <a class="w3-left w3-btn" href="javascript:void(0)" ng-hide="isHome" ng-click="prevPage()">❮  Previous</a>
         <a class="w3-right w3-btn" href="javascript:void(0)" ng-click="nextPage()">Next ❯</a>       
     </div>

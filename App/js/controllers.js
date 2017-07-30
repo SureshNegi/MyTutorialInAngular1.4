@@ -1,36 +1,47 @@
 angular.module('F1FeederApp.controllers', []).
 
-  /* Drivers controller */
-  controller('homeController', ['$scope', 'ergastAPIservice', 'pagination', '$state', 'appConfig', function ($scope, ergastAPIservice, pagination, $state, $http, appConfig) {
-     // var myInjector = angular.injector(["F1FeederApp.services"]);
-    
+/* Drivers controller */
+  controller('homeController', ['$scope', 'ergastAPIservice', 'pagination', '$state', 'appConfig', function($scope, ergastAPIservice, pagination, $state, $http, appConfig) {
+      // var myInjector = angular.injector(["F1FeederApp.services"]);
+
       //var pagination = myInjector.get("pagination");
+      $scope.isHome = true;
       $scope.nameFilter = null;
       $scope.driversList = [];
       var obj = { topics: ['Angular HOME', 'Angular Intro'] };
+      $scope.techList1 = ["Angular","Java"];
+      $scope.techList = [];
+      for (var i = 0; i < 3; i++) {
+          $scope.techList.push({ id: i, tech: "tech" + i });
+      }
+      $scope.selectedTech = $scope.techList[0];
       str = JSON.stringify(obj);
-      $scope.searchFilter = function (driver) {
+      $scope.searchFilter = function(driver) {
           var re = new RegExp($scope.nameFilter, 'i');
           return !$scope.nameFilter || re.test(driver.displayName) || re.test(driver.displayName);
       };
-      $scope.getInformationById = function (object) {
-          //$state.go('driver', {
-          //    "data": object
-          //});
+
+      $scope.getAllStates = function(callback) {
+          callback($scope.allStates);
+      };
+
+      $scope.onTechChange = function(item) {
+          alert(item);
       }
-      $scope.loadContent = function (item) {          
-          $scope.defaultSelected = item;          
-          $scope.tutorialTopics.forEach(function (item) {
+
+      $scope.loadContent = function(item) {
+          $scope.defaultSelected = item;
+          $scope.tutorialTopics.forEach(function(item) {
               item.cls = "";
           })
-          item.cls = "selectedItem";
+          item.cls = "active";
       }
-      $scope.loadPage = function (topic) {
+      $scope.loadPage = function(topic) {
           //$state.go('newPage');
           $scope.topic = topic;
       }
 
-      ergastAPIservice.getTopics().success(function (response) {
+      ergastAPIservice.getTopics().success(function(response) {
           //Digging into the response to get the relevant data
           //$scope.driversList = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
           //$scope.tutorialTopics = response.topics;
@@ -38,19 +49,19 @@ angular.module('F1FeederApp.controllers', []).
           pagination.setTotalPage($scope.tutorialTopics.length);
           $scope.defaultSelected = $scope.tutorialTopics[0];
       });
-  }]).
+  } ]).
 
-  /* Driver controller */
-  controller('driverController', function ($scope, $routeParams, ergastAPIservice, $rootScope, $stateParams) {
+/* Driver controller */
+  controller('driverController', function($scope, $routeParams, ergastAPIservice, $rootScope, $stateParams) {
       var _data = $stateParams.data;
       $scope.id = _data.Driver.driverId;
       $scope.races = [];
       $scope.driver = null;
-      ergastAPIservice.getDriverDetails($scope.id).success(function (response) {
+      ergastAPIservice.getDriverDetails($scope.id).success(function(response) {
           $scope.driver = response.MRData.StandingsTable.StandingsLists[0].DriverStandings[0];
       });
 
-      ergastAPIservice.getDriverRaces($scope.id).success(function (response) {
+      ergastAPIservice.getDriverRaces($scope.id).success(function(response) {
           $scope.races = response.MRData.RaceTable.Races;
       });
   }).
@@ -61,7 +72,7 @@ angular.module('F1FeederApp.controllers', []).
       $scope.races = [];
       $scope.driver = null;
 
-      $scope.login = function () {
+      $scope.login = function() {
           // $location.path('/drivers');
           user_info = { uName: $scope.username, passWord: $scope.password };
           $.ajax({
@@ -70,48 +81,48 @@ angular.module('F1FeederApp.controllers', []).
               contentType: "application/json; charset=utf-8",
               dataType: "json",
               type: 'POST',
-              success: function (data) {
+              success: function(data) {
                   if (data.response.status == 1)
                       $location.path('/drivers');
                   else {
-                      $scope.$apply(function () {
+                      $scope.$apply(function() {
                           $scope.loginError = true;
                       });
 
                   }
               },
-              error: function (xhr, status, error) {
-                  $scope.$apply(function () {
+              error: function(xhr, status, error) {
+                  $scope.$apply(function() {
                       $scope.loginError = true;
                   });
               }
-          });;
+          }); ;
       }
-      $scope.SignUp = function () {
+      $scope.SignUp = function() {
           $location.path('/register');
       }
   }).
- controller('contentController', function ($scope, $routeParams, ergastAPIservice, $location) { })
+ controller('contentController', function($scope, $routeParams, ergastAPIservice, $location) { })
 .controller('registerController', function($scope, $routeParams, ergastAPIservice, $location, appConfig) {
-    this.register = function () {
+    this.register = function() {
 
         user_info = { fName: this.user.firstName, lName: this.user.lastName, uName: this.user.username, eMail: this.user.uEmail, passWord: this.user.password };
 
 
         $.ajax({
-        url: appConfig.BASE_URL + '/addUser',
+            url: appConfig.BASE_URL + '/addUser',
             data: JSON.stringify(user_info),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             type: 'POST',
 
-            success: function (data) {
+            success: function(data) {
                 $location.path('/login');
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
 
                 alert('error on user registeration');
             }
-        });;
+        }); ;
     }
 });
